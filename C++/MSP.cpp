@@ -144,16 +144,23 @@ printBill(Bill b){
                         out<<"\t"<<itemName<<" : "<<itemRate<<" : "<<itemQuant<<endl;
 
                     }
-                }
-                else{
                     
-
+                    else{
+                        cout<<"\tSorry, "<<item<<" Ended!"<<endl;
+                    }
                 }
+
                 else{
                     // not item found
-
+                    out<<line<<;
                 }
             }
+            if(!found){
+                cout<<"\tItem Not Available!"<<endl;
+            }
+            out.close();
+            in.close();
+            remove();
         }
     }
 }
