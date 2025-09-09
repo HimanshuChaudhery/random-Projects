@@ -96,15 +96,15 @@ addItem(Bill b){
 }
 
 // PRINT BILL
-printBill(Bill b){
+printBill(){
     system("cls");
     int count = 0;
     bool close = false;
     while(!close){
         system("cls");
         int choice;
-        cout<<"\tAdd Bill."<<endl;
-        cout<<"\tClose Session"<<endl;
+        cout<<"\t1.Add Bill."<<endl;
+        cout<<"\t2.Close Session"<<endl;
         cout<<"\tEnter Choice: ";
         cin>>choice;
 
@@ -113,7 +113,7 @@ printBill(Bill b){
             int quant;
             cout<<"\tEnter Item: ";
             cin>>item;
-            cout<<"\tEnter Quantity";
+            cout<<"\tEnter Quantity: ";
             cin>>quant;
 
             ifstream in("D:/bill.txt"); // ifstream is used to read that data from file.
@@ -129,14 +129,14 @@ printBill(Bill b){
                 string itemName;
                 int itemRate, itemQuant;
                 char delimiter;
-                ss>>itemName>>delimiter>>itemrate>>delimiter>>itemQuant;
+                ss>>itemName>>delimiter>>itemRate>>delimiter>>itemQuant;
                 
                 if(item==itemName){
                     found = true;
-                    if(quant==itemQuant){
+                    if(quant<=itemQuant){
                         int amount = itemRate * quant;
                         cout<<"\t Item | Rate | Quantity | Amount"<<endl;
-                        cout<<"\t"<<itemName<<"\t "<<ItemRate<<"\t "<<quant<<"\t "<<amount<<endl;
+                        cout<<"\t"<<itemName<<"\t "<<itemRate<<"\t "<<quant<<"\t "<<amount<<endl;
                         int newQuant = itemQuant - quant;
                         itemQuant = newQuant;
                         count +=amount;
@@ -152,7 +152,7 @@ printBill(Bill b){
 
                 else{
                     // not item found
-                    out<<line<<;
+                    out<<line<<endl;
                 }
             }
             if(!found){
@@ -160,9 +160,20 @@ printBill(Bill b){
             }
             out.close();
             in.close();
-            remove();
+            remove("D:/bill.txt");
+            rename("D:/bill temp.txt", "D:/bill.txt");
         }
+        else if(choice==2){
+            close=true;
+            cout<<"\tCounting Total Bill"<<endl;
+        }
+        Sleep(3000);
     }
+    system("cls");
+    cout<<endl<<endl;
+    cout<<"\tTotal Bill ---------------------------- : "<<count<<endl<<endl;
+    cout<<"\tThanks for shopping!"<<endl;
+    Sleep(5000);
 }
 
 
@@ -188,8 +199,17 @@ int main(){
         }
 
         else if(val==2){
-
+            system("cls");
+            printBill();
+            Sleep(3000);
         }
 
+        else if(val==3){
+            system("cls");
+            exit=true;
+            cout<<"\tGood Luck!"<<endl;
+            Sleep(3000);
+        }
     }
+    return 0;
 }
